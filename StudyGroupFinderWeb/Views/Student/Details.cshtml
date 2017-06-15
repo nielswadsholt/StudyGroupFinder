@@ -1,0 +1,42 @@
+﻿@using Util
+@model Graph.Node<StudyGroupFinder.Student>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <p>
+        Navn: @Model.Data.Name
+        <br />
+        Studie: @Model.Data.Study
+        <br />
+        Søger studiegruppe? @(Model.Data.SeeksGroup ? "JA" : "NEJ")
+    </p>
+    <p>
+        Personlige egenskaber:<br />
+        @Model.Data.Attributes.ToSeparatedString(", ")<br />
+    </p>
+    <p>
+        Studierelevante egenskaber:<br />
+        @Model.Data.StudyAttributes.ToSeparatedString(", ")<br />
+    </p>
+    <p>
+        Naboer:<br />
+        @Model.Neighbors.ToSeparatedString(", ")<br />
+    </p>
+    <div>
+        @Html.ActionLink("Tilbage til oversigten", "Index")
+    </div>
+</body>
+</html>

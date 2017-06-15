@@ -1,0 +1,29 @@
+﻿@using Util
+@model IEnumerable<Graph.Path>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Søgeresultat</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <p>Sti til nærmeste studerende med samme fag: @Model.ElementAt(0)</p>
+    <p>Sti til nærmeste studerende med samme fag, som søger studiegruppe: @Model.ElementAt(1)</p>
+    <p>Sti til nærmeste studerende med samme fag, som søger studiegruppe + har mindst én studierelevant egenskab tilfælles: @Model.ElementAt(2)</p>
+    <p>Sti til nærmeste studerende med mindst én egenskab tilfælles: @Model.ElementAt(3)</p>
+    <p>Sti til nærmeste studerende med mindst tre egenskaber tilfælles: @Model.ElementAt(4)</p>
+    <p>Sti til nærmeste studerende med egenskaben 'A': @Model.ElementAt(5)</p>
+    <div>
+        @Html.ActionLink("Tilbage til oversigten", "Index")
+    </div>
+</body>
+</html>
