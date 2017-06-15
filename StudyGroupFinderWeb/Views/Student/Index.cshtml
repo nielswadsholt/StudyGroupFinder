@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Graph.Node<StudyGroupFinder.Student>>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Studiegruppefinderen - Oversigt</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>Studiegruppefinderen</h1>
+    <h3>Registrerede studerende:</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Navn
+            </th>
+            <th>
+                Studie
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.Study)
+                </td>
+                <td>
+                    @Html.ActionLink("Detaljer", "Details", new { name = item.Data.Name })
+                </td>
+                <td>
+                    @Html.ActionLink("Find nærmeste", "Find", new { name = item.Data.Name })
+                </td>
+            </tr>
+        }
+    </table>
+    <p>
+        @Html.ActionLink("Opret ny studerende", "Create")
+    </p>
+</body>
+</html>

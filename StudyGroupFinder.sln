@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyGroupFinder", "StudyGroupFinder\StudyGroupFinder.csproj", "{0FE16426-7FA0-4220-96F8-B95A4949472B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj", "{2AE1630A-5B53-4628-8F4B-09308492EB80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyGroupFinderTest", "GraphTest\StudyGroupFinderTest.csproj", "{A93201CD-F172-4D1A-8B5D-474FEAEECCE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{587B1D34-C900-41EB-84CC-934F61E14DF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyGroupFinderWeb", "StudyGroupFinderWeb\StudyGroupFinderWeb.csproj", "{0B421C53-5C28-4D24-B5D4-2417635C061B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyGroupFinderConsole", "StudyGroupFinderConsole\StudyGroupFinderConsole.csproj", "{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FE16426-7FA0-4220-96F8-B95A4949472B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE16426-7FA0-4220-96F8-B95A4949472B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE16426-7FA0-4220-96F8-B95A4949472B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE16426-7FA0-4220-96F8-B95A4949472B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE1630A-5B53-4628-8F4B-09308492EB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE1630A-5B53-4628-8F4B-09308492EB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE1630A-5B53-4628-8F4B-09308492EB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE1630A-5B53-4628-8F4B-09308492EB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A93201CD-F172-4D1A-8B5D-474FEAEECCE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A93201CD-F172-4D1A-8B5D-474FEAEECCE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A93201CD-F172-4D1A-8B5D-474FEAEECCE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A93201CD-F172-4D1A-8B5D-474FEAEECCE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{587B1D34-C900-41EB-84CC-934F61E14DF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{587B1D34-C900-41EB-84CC-934F61E14DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{587B1D34-C900-41EB-84CC-934F61E14DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{587B1D34-C900-41EB-84CC-934F61E14DF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B421C53-5C28-4D24-B5D4-2417635C061B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B421C53-5C28-4D24-B5D4-2417635C061B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B421C53-5C28-4D24-B5D4-2417635C061B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B421C53-5C28-4D24-B5D4-2417635C061B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
