@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Util;
 
 namespace StudyGroupFinder
 {
@@ -19,6 +20,16 @@ namespace StudyGroupFinder
         {
             Study = study;
             StudyAttributes = new HashSet<string>();
+        }
+
+        public string GetDetails()
+        {
+            StringBuilder sb = new StringBuilder($"Name: { Name }");
+            sb.Append($", Study: { Study }");
+            sb.Append($", Seeks group: { SeeksGroup }");
+            sb.Append($", Attributes: [{ Attributes.ToSeparatedString() }]");
+            sb.Append($", Study attributes: [{ StudyAttributes.ToSeparatedString() }]");
+            return sb.ToString();
         }
 
         /// <summary>

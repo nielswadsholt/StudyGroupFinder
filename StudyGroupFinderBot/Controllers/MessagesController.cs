@@ -19,7 +19,8 @@ namespace StudyGroupFinderBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new SimpleDialog());
+                //await Conversation.SendAsync(activity, () => new SimpleDialog());
+                await Conversation.SendAsync(activity, () => new SGFLuisDialog());
             }
             else
             {

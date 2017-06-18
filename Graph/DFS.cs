@@ -76,5 +76,10 @@ namespace Graph
 
             return "";
         }
+
+        public override string ToString()
+        {
+            return "DFS";
+        }
     }
 }

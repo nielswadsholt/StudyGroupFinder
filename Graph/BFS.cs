@@ -62,5 +62,10 @@ namespace Graph
 
             return path;
         }
+
+        public override string ToString()
+        {
+            return "BFS";
+        }
     }
 }

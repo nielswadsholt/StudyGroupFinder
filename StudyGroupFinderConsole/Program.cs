@@ -178,7 +178,12 @@ namespace StudyGroupFinderConsole
 
             digraph.PathFinder = new DFS<Student>();
             Console.WriteLine("\nVilkårlig rute til hver af de andre studerende (DFS):");
-            foreach (KeyValuePair<string, string> dest in digraph.FindPathsToAll(studentName))
+
+            // FindPathsToAll iterator saved in variable for inspection. Set breakpoint below to inspect.
+            var allPaths = digraph.FindPathsToAll(studentName);
+            var nextPath = allPaths.FirstOrDefault();
+
+            foreach (KeyValuePair<string, string> dest in allPaths)
             {
                 Console.WriteLine($"{studentName} til {dest.Key}:  " + dest.Value); ;
             }
