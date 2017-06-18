@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyGroupFinder", "StudyGroupFinder\StudyGroupFinder.csproj", "{0FE16426-7FA0-4220-96F8-B95A4949472B}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyGroupFinderWeb", "StudyGroupFinderWeb\StudyGroupFinderWeb.csproj", "{0B421C53-5C28-4D24-B5D4-2417635C061B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyGroupFinderConsole", "StudyGroupFinderConsole\StudyGroupFinderConsole.csproj", "{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyGroupFinderBot", "StudyGroupFinderBot\StudyGroupFinderBot.csproj", "{347F844E-3554-4EC1-B6EB-3ED17C150F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28A7F6B7-FB1C-41B0-87AE-515C0D6B94BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{347F844E-3554-4EC1-B6EB-3ED17C150F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{347F844E-3554-4EC1-B6EB-3ED17C150F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{347F844E-3554-4EC1-B6EB-3ED17C150F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{347F844E-3554-4EC1-B6EB-3ED17C150F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
