@@ -23,6 +23,7 @@ namespace StudyGroupFinderConsole
 
             // Generate student graph
             var digraph = StudentGraphGenerator.Generate(20, 5);
+            //var digraph = StudentGraphGenerator.Sample();
 
             Console.WriteLine("\n=========================== Registrerede studerende ===========================\n");
             Console.WriteLine("(Navn,  studie,  søger studiegruppe?,  [egenskaber],  {studierelevante egenskaber})");
