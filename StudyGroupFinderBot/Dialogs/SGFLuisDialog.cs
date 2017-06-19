@@ -2,7 +2,6 @@
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
-using Microsoft.Bot.Connector;
 using StudyGroupFinder;
 using System;
 using System.Collections.Generic;
@@ -13,35 +12,18 @@ using Util;
 
 namespace StudyGroupFinderBot.Dialogs
 {
-    [LuisModel("a60b39e6-52b8-4c55-a73d-4ee62cf25524", "d4f9aeea409242a1bca575bd2612fc4f")]
+    [LuisModel("", "")]
     [Serializable]
     public class SGFLuisDialog : LuisDialog<object>
     {
         private static Digraph<Student> digraph = StudentGraphGenerator.Sample();
         private static Student currentStudent;
-        private static Student newStudent;
-        private static string[] newNeighbors;
-        private int newStudentStep = -1;
-        private string student = "";
 
         [LuisIntent("Restart")]
         public async Task Restart(IDialogContext context, LuisResult result)
         {
-            PromptDialog.Confirm(context, RestartAsync, $"Are you sure you want to restart? All changes will be lost.");
-        }
-
-        private async Task RestartAsync(IDialogContext context, IAwaitable<bool> result)
-        {
-            if (await result)
-            {
-                digraph = StudentGraphGenerator.Sample();
-                await context.PostAsync($"The system has been restarted.");
-            }
-            else
-            {
-                await context.PostAsync($"Restart was cancelled.");
-            }
-
+            digraph = StudentGraphGenerator.Sample();
+            await context.PostAsync($"The system has been restarted.");
             context.Wait(MessageReceived);
         }
 
@@ -93,138 +75,10 @@ namespace StudyGroupFinderBot.Dialogs
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("AddStudent")]
-        public async Task AddStudent(IDialogContext context, LuisResult result)
-        {
-            newStudentStep = 0;
-            await context.PostAsync("What is the student's name?");
-            context.Wait(AddStudentAsync);
-        }
-
-        private async Task AddStudentAsync(IDialogContext context, IAwaitable<object> result)
-        {
-            var activity = await result as Activity;
-
-            if (newStudentStep == 0)
-            {
-                // Name
-                string newName = activity.Text.Substring(0, 1).ToUpper() + activity.Text.Substring(1).ToLower();
-
-                if (digraph.Contains(newName))
-                {
-                    newName = StudentGraphGenerator.GenerateUniqueName(digraph, newName);
-                    await context.PostAsync($"Because the system already contains a student with the given name, it has been changed to { newName }.");
-                }
-
-                newStudent = new Student(newName);
-                newStudentStep = 1;
-                await context.PostAsync($"What subject does { newStudent } study?");
-                context.Wait(AddStudentAsync);
-            }
-            else if (newStudentStep == 1)
-            {
-                // Study
-                newStudent.Study = activity.Text.Substring(0, 1).ToUpper() + activity.Text.Substring(1);
-                newStudentStep = 2;
-                PromptDialog.Confirm(context, StudyGroupAsync, $"Does { newStudent } seek a study group?");
-            }
-            else if (newStudentStep == 2)
-            {
-                // SeeksGroup (has already been handled in separate method - this code should never be reached)
-                newStudentStep = 3;
-                context.Wait(AddStudentAsync);
-            }
-            else if (newStudentStep == 3)
-            {
-                // Attributes
-                if (activity.Text == "-") activity.Text = "";
-                newStudent.Attributes = new HashSet<string>(activity.Text.ToUpper().Split(' '));
-                newStudentStep = 4;
-                await context.PostAsync($"Enter { newStudent }'s study attributes separated by spaces. Type '-' if there are none.");
-                context.Wait(AddStudentAsync);
-            }
-            else if (newStudentStep == 4)
-            {
-                // StudyAttributes
-                if (activity.Text == "-") activity.Text = "";
-                newStudent.StudyAttributes = new HashSet<string>(activity.Text.ToUpper().Split(' '));
-                newStudentStep = 5;
-                await context.PostAsync($"Enter { newStudent }'s neighbors separated by spaces. Type '-' if there are none.");
-                context.Wait(AddStudentAsync);
-            }
-            else if (newStudentStep == 5)
-            {
-                // Neighbors
-                string[] rawNeighbors;
-
-                if (activity.Text == "-")
-                {
-                    rawNeighbors = new string[] { };
-                }
-                else
-                {
-                    rawNeighbors = activity.Text.Split(' ');
-                }
-                
-                newNeighbors = new string[rawNeighbors.Length];
-
-                for (int i = 0; i < rawNeighbors.Length; i++)
-                {
-                    newNeighbors[i] = rawNeighbors[i].Substring(0, 1).ToUpper() + rawNeighbors[i].Substring(1).ToLower();
-                }
-
-                newStudentStep = 0;
-                await context.PostAsync($"The new student's details are: { newStudent.GetDetails() }, Neighbors: [{ newNeighbors.ToSeparatedString() }]");
-                PromptDialog.Confirm(context, NewStudentAsync, $"Can you confirm the details?");
-            }
-            else
-            {
-                // Error
-                await context.PostAsync($"I am a bit confused, sorry. Please try again.");
-                context.Wait(MessageReceived);
-            }
-        }
-
-        private async Task NewStudentAsync(IDialogContext context, IAwaitable<bool> result)
-        {
-            if (await result)
-            {
-                digraph.AddNode(new Node<Student>(newStudent));
-
-                foreach (string neighbor in newNeighbors)
-                {
-                    digraph.AddEdge(newStudent.Name, neighbor);
-                }
-
-                await context.PostAsync($"{ newStudent.Name } was added to the system.");
-            }
-            else
-            {
-                await context.PostAsync($"The operation was cancelled. Type 'new student' to try again.");
-            }
-
-            context.Wait(MessageReceived);
-        }
-
-        private async Task StudyGroupAsync(IDialogContext context, IAwaitable<bool> result)
-        {
-            if (await result)
-            {
-                newStudent.SeeksGroup = true;
-            }
-            else
-            {
-                newStudent.SeeksGroup = true;
-            }
-
-            newStudentStep = 3;
-            await context.PostAsync($"Enter { newStudent }'s attributes separated by spaces. Type '-' if there are none.");
-            context.Wait(AddStudentAsync);
-        }
-
         [LuisIntent("RemoveStudent")]
         public async Task RemoveStudent(IDialogContext context, LuisResult result)
         {
+            string student = "";
             EntityRecommendation rec;
 
             if (result.TryFindEntity("Student", out rec))
@@ -235,37 +89,22 @@ namespace StudyGroupFinderBot.Dialogs
 
                     if (digraph.Contains(student))
                     {
-                        PromptDialog.Confirm(context, RemoveStudentAsync, $"Are you sure you want to delete { student }?");
+                        digraph.RemoveNode(student);
+                        await context.PostAsync($" { student } has been removed from the system.");
                     }
                     else
                     {
                         await context.PostAsync("The system does not contain a student with the given name.");
-                        context.Wait(MessageReceived);
                     }
                 }
                 catch (Exception ex)
                 {
                     await context.PostAsync($"Whoops, something went wrong. Please try again. Details: { ex.Message }");
-                    context.Wait(MessageReceived);
                 }
             }
             else
             {
                 await context.PostAsync("The student name was not recognized. Please try again.");
-                context.Wait(MessageReceived);
-            }
-        }
-
-        private async Task RemoveStudentAsync(IDialogContext context, IAwaitable<bool> result)
-        {
-            if (await result)
-            {
-                digraph.RemoveNode(student);
-                await context.PostAsync($" { student } has been removed from the system.");
-            }
-            else
-            {
-                await context.PostAsync($"Removal of { student } was cancelled.");
             }
 
             context.Wait(MessageReceived);
@@ -279,11 +118,7 @@ namespace StudyGroupFinderBot.Dialogs
 
             try
             {
-                if (currentStudent is null)
-                {
-                    await context.PostAsync("You must first select a student to search from. Type 'set current student to' followed by a name.");
-                }
-                else if (result.TryFindEntity("Student", out rec))
+                if (result.TryFindEntity("Student", out rec))
                 {
                     student = rec.Entity.Substring(0, 1).ToUpper() + rec.Entity.Substring(1).ToLower();
 
@@ -317,7 +152,7 @@ namespace StudyGroupFinderBot.Dialogs
                     }
                     else
                     {
-                        await context.PostAsync($"Sorry, there is no path from { currentStudent } to a student who also studies { study } and seeks a study group.");
+                        await context.PostAsync($"Sorry, there is no path from { currentStudent } to a student who also studies { study.ToLower() } and seeks a study group.");
                     }
                 }
                 else if (result.Query.Contains("same study"))
@@ -328,11 +163,11 @@ namespace StudyGroupFinderBot.Dialogs
 
                     if (path.Count > 0)
                     {
-                        await context.PostAsync($"Path from { currentStudent } to closest student who also studies { study }: { path }.");
+                        await context.PostAsync($"Path from { currentStudent } to closest student who also studies { study.ToLower() }: { path }.");
                     }
                     else
                     {
-                        await context.PostAsync($"There is no path from { currentStudent } to a student who also studies { study }.");
+                        await context.PostAsync($"There is no path from { currentStudent } to a student who also studies { study.ToLower() }.");
                     }
                 }
                 else

@@ -18,7 +18,7 @@ namespace StudyGroupFinderConsole
             Console.Title = "Studiegruppefinderen v. 1.0";
             Console.WriteLine("******************************************************************************");
             Console.WriteLine("*                  S T U D I E G R U P P E F I N D E R E N                   *");
-            Console.WriteLine("*                                  v. 2.1                                    *");
+            Console.WriteLine("*                                  v. 1.0                                    *");
             Console.WriteLine("******************************************************************************");
 
             // Generate student graph
@@ -46,30 +46,35 @@ namespace StudyGroupFinderConsole
                 Console.WriteLine("\n=============================== Ny studerende ================================\n");
 
                 studentName = "";
-
                 while (studentName == "")
                 {
                     Console.Write("Indtast navn: ");
                     studentName = Console.ReadLine();
                 }
 
-                studentName = studentName.Substring(0, 1).ToUpper() + studentName.Substring(1).ToLower();
-
                 if (digraph.Contains(studentName))
                 {
-                    studentName = StudentGraphGenerator.GenerateUniqueName(digraph, studentName);
+                    string newName = studentName;
+                    int suffix = 1;
+
+                    while (digraph.Contains(newName))
+                    {
+                        newName = studentName + suffix;
+                        suffix += 1;
+                    }
+
+                    studentName = newName;
+
                     Console.WriteLine("Da systemet allerede indeholdt en studerende med dit navn, er dit brugernavn ændret til " + studentName);
                 }
 
                 string study = "";
-
                 while (study == "")
                 {
                     Console.Write("Indtast studie: ");
                     study = Console.ReadLine();
                 }
 
-                study = study.Substring(0, 1).ToUpper() + study.Substring(1).ToLower();
                 string seeksGroup = "";
 
                 while (!new string[] { "J", "N" }.Contains(seeksGroup.ToUpper()))
