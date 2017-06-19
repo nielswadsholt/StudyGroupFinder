@@ -13,7 +13,7 @@ using Util;
 
 namespace StudyGroupFinderBot.Dialogs
 {
-    [LuisModel("***REMOVED***", "***REMOVED***")]
+    [LuisModel("", "")]
     [Serializable]
     public class SGFLuisDialog : LuisDialog<object>
     {
