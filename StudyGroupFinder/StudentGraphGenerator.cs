@@ -123,5 +123,25 @@ namespace StudyGroupFinder
 
             return digraph;
         }
+
+        /// <summary>
+        /// Returns a unique version of the given name by adding a suffix if needed.
+        /// </summary>
+        /// <param name="digraph"></param>
+        /// <param name="studentName"></param>
+        /// <returns></returns>
+        public static string GenerateUniqueName(Digraph<Student> digraph, string studentName)
+        {            
+            string newName = studentName;
+            int suffix = 1;
+
+            while (digraph.Contains(newName))
+            {
+                newName = studentName + suffix;
+                suffix += 1;
+            }
+
+            return newName;
+        }
     }
 }
