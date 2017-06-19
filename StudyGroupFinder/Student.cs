@@ -12,9 +12,15 @@ namespace StudyGroupFinder
     /// </summary>
     public class Student : Person
     {
-        public string Study { get; private set; }
+        public string Study { get; set; }
         public HashSet<string> StudyAttributes { get; set; }
         public bool SeeksGroup { get; set; }
+
+        public Student(string name) : base(name)
+        {
+            Study = "";
+            StudyAttributes = new HashSet<string>();
+        }
 
         public Student(string name, string study) : base(name)
         {
