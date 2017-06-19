@@ -13,7 +13,7 @@ using Util;
 
 namespace StudyGroupFinderBot.Dialogs
 {
-    [LuisModel("a60b39e6-52b8-4c55-a73d-4ee62cf25524", "d4f9aeea409242a1bca575bd2612fc4f")]
+    [LuisModel("", "")]
     [Serializable]
     public class SGFLuisDialog : LuisDialog<object>
     {
