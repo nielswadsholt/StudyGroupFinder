@@ -40,7 +40,7 @@ namespace StudyGroupFinder
         {
             // NOTE: The main directory path is absolute to accomodate StudyGroupFinderWeb
             // Must be changed before running on a different machine! 
-            string mainDirectory = @"";
+            string mainDirectory = @"C:/Users/Niels/Dropbox/Uddannelse/au_it/prog_vg2/eksamen/StudyGroupFinder/";
             List<string> names = Helpers.LoadStrings(mainDirectory + @"StudyGroupFinder/Data/names.txt");
             List<string> studies = Helpers.LoadStrings(mainDirectory + @"StudyGroupFinder/Data/studies.txt");
             List<string> attributes = Helpers.LoadStrings(mainDirectory + @"StudyGroupFinder/Data/attributes.txt");
