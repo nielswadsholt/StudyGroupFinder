@@ -35,6 +35,11 @@ namespace StudyGroupFinderBot.Dialogs
             if (await result)
             {
                 digraph = StudentGraphGenerator.Sample();
+                currentStudent = null;
+                newStudent = null;
+                newNeighbors = null;
+                newStudentStep = -1;
+                student = "";
                 await context.PostAsync($"The system has been restarted.");
             }
             else
